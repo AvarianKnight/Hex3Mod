@@ -4,7 +4,6 @@ using RoR2.ExpansionManagement;
 using System.Linq;
 using System;
 using UnityEngine;
-using VoidItemAPI;
 using Hex3Mod.HelperClasses;
 using Hex3Mod.Utils;
 using static Hex3Mod.Main;
@@ -47,7 +46,7 @@ namespace Hex3Mod.Items
             item.descriptionToken = "H3_" + upperName + "_DESC";
             item.loreToken = "H3_" + upperName + "_LORE";
 
-            item.tags = new ItemTag[]{ ItemTag.Healing };
+            item.tags = new ItemTag[]{ ItemTag.Healing, ItemTag.CanBeTemporary };
             item._itemTierDef = helpers.GenerateItemDef(ItemTier.VoidTier3);
             item.canRemove = true;
             item.hidden = false;
@@ -275,16 +274,16 @@ namespace Hex3Mod.Items
         private static void AddHooks() // Insert hooks here
         {
             // Void transformation
-            VoidTransformation.CreateTransformation(itemDef, "PermanentDebuffOnHit");
+            VoidTransformation.Add(itemDef, "PermanentDebuffOnHit");
 
             void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
             {
                 orig(self, damageInfo);
                 if (self.body && self.body.inventory && damageInfo.damage > 0f && !damageInfo.rejected)
                 {
-                    if (self.body.inventory.GetItemCount(itemDef) > 0)
+                    if (self.body.inventory.GetItemCountEffective(itemDef) > 0)
                     {
-                        self.body.AddTimedBuff(hermitBuff, TheHermit_BuffDuration.Value * self.body.inventory.GetItemCount(itemDef));
+                        self.body.AddTimedBuff(hermitBuff, TheHermit_BuffDuration.Value * self.body.inventory.GetItemCountEffective(itemDef));
                     }
                     if (self.body.GetBuffCount(hermitBuff) > 0)
                     {

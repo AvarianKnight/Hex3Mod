@@ -4,7 +4,6 @@ using RoR2.ExpansionManagement;
 using System.Linq;
 using UnityEngine;
 using Hex3Mod.HelperClasses;
-using VoidItemAPI;
 using UnityEngine.Networking;
 using System;
 using Hex3Mod.Utils;
@@ -47,7 +46,7 @@ namespace Hex3Mod.Items
             item.descriptionToken = "H3_" + upperName + "_DESC";
             item.loreToken = "H3_" + upperName + "_LORE";
 
-            item.tags = new ItemTag[]{ ItemTag.Utility, ItemTag.Healing, ItemTag.AIBlacklist, ItemTag.BrotherBlacklist };
+            item.tags = new ItemTag[]{ ItemTag.Utility, ItemTag.Healing, ItemTag.AIBlacklist, ItemTag.BrotherBlacklist, ItemTag.CanBeTemporary };
             item._itemTierDef = helpers.GenerateItemDef(ItemTier.Tier3);
             item.canRemove = true;
             item.hidden = false;
@@ -271,7 +270,7 @@ namespace Hex3Mod.Items
             {
                 orig(self);
                 if (!self.inventory) { return; }
-                int itemCount = self.inventory.GetItemCount(itemDef);
+                int itemCount = self.inventory.GetItemCountEffective(itemDef);
                 if (itemCount > 0)
                 {
                     DoNotEatBehavior component;

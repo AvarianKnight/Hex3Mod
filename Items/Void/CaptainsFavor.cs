@@ -3,7 +3,6 @@ using RoR2;
 using RoR2.ExpansionManagement;
 using UnityEngine;
 using Hex3Mod.HelperClasses;
-using VoidItemAPI;
 using Hex3Mod.Utils;
 using static Hex3Mod.Main;
 using System.Linq;
@@ -51,7 +50,7 @@ namespace Hex3Mod.Items
             item.descriptionToken = "H3_" + upperName + "_DESC";
             item.loreToken = "H3_" + upperName + "_LORE";
 
-            item.tags = new ItemTag[]{ ItemTag.Utility, ItemTag.AIBlacklist, ItemTag.BrotherBlacklist };
+            item.tags = [ItemTag.Utility, ItemTag.AIBlacklist, ItemTag.BrotherBlacklist, ItemTag.CanBeTemporary];
             item._itemTierDef = helpers.GenerateItemDef(ItemTier.VoidTier1);
             item.canRemove = true;
             item.hidden = false;
@@ -67,8 +66,8 @@ namespace Hex3Mod.Items
         {
             GameObject ItemDisplayPrefab = helpers.PrepareItemDisplayModel(PrefabAPI.InstantiateClone(LoadPrefab(), LoadPrefab().name + "Display", false));
 
-            ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
-            rules.Add("mdlCommandoDualies", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            ItemDisplayRuleDict rules = new();
+            rules.Add("mdlCommandoDualies", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Pelvis",
@@ -76,9 +75,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(288.0233F, 244.3802F, 114.5137F),
                         localScale = new Vector3(0.21322F, 0.21322F, 0.21322F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlHuntress", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlHuntress", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "HandL",
@@ -86,9 +85,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(58.18119F, 86.20083F, 88.43928F),
                         localScale = new Vector3(0.17556F, 0.17556F, 0.17556F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlToolbot", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlToolbot", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Chest",
@@ -96,9 +95,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(8.81671F, 341.1347F, 294.7228F),
                         localScale = new Vector3(1.37533F, 1.37533F, 1.37533F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlEngi", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlEngi", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Pelvis",
@@ -106,9 +105,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(286.1519F, 112.8171F, 315.7423F),
                         localScale = new Vector3(0.22062F, 0.22062F, 0.22062F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlMage", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlMage", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Chest",
@@ -116,9 +115,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(9.10053F, 253.2964F, 18.96548F),
                         localScale = new Vector3(0.18893F, 0.18893F, 0.18893F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlMerc", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlMerc", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "ThighL",
@@ -126,9 +125,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(281.2404F, 1.5235F, 246.6278F),
                         localScale = new Vector3(0.22681F, 0.22681F, 0.22681F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlTreebot", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlTreebot", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "WeaponPlatform",
@@ -136,9 +135,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(72.32838F, 289.0612F, 239.6884F),
                         localScale = new Vector3(0.45311F, 0.45311F, 0.45311F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlLoader", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlLoader", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "ThighL",
@@ -146,9 +145,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(330.304F, 65.97124F, 91.43171F),
                         localScale = new Vector3(0.2498F, 0.2498F, 0.2498F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlCroco", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlCroco", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "SpineChest1",
@@ -156,9 +155,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(301.1924F, 39.61919F, 259.5851F),
                         localScale = new Vector3(2.09619F, 2.09619F, 2.10439F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlCaptain", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlCaptain", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "HandR",
@@ -166,9 +165,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(353.9582F, 3.41899F, 12.58068F),
                         localScale = new Vector3(0.29051F, 0.29051F, 0.29051F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlBandit2", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlBandit2", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Hat",
@@ -176,9 +175,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(73.3124F, 346.5022F, 10.95594F),
                         localScale = new Vector3(0.16652F, 0.16652F, 0.16652F)
                     }
-                }
+                ]
             );
-            rules.Add("EngiTurretBody", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("EngiTurretBody", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Head",
@@ -186,9 +185,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(0F, 346.9402F, 300.2751F),
                         localScale = new Vector3(0.88916F, 0.88916F, 0.88916F)
                     }
-                }
+                ]
             );
-            rules.Add("EngiWalkerTurretBody", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("EngiWalkerTurretBody", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Head",
@@ -196,9 +195,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(283.4064F, 21.09174F, 6.65518F),
                         localScale = new Vector3(0.9191F, 0.9191F, 0.9191F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlScav", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlScav", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Backpack",
@@ -206,9 +205,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(339.7366F, 14.63561F, 231.4966F),
                         localScale = new Vector3(2.95015F, 2.95015F, 2.95015F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlRailGunner", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlRailGunner", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "CalfR",
@@ -216,9 +215,9 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(317.8916F, 346.8395F, 348.7143F),
                         localScale = new Vector3(0.35865F, 0.35865F, 0.35865F)
                     }
-                }
+                ]
             );
-            rules.Add("mdlVoidSurvivor", new RoR2.ItemDisplayRule[]{new RoR2.ItemDisplayRule{
+            rules.Add("mdlVoidSurvivor", [new ItemDisplayRule{
                         ruleType = ItemDisplayRuleType.ParentedPrefab,
                         followerPrefab = ItemDisplayPrefab,
                         childName = "Head",
@@ -226,7 +225,7 @@ namespace Hex3Mod.Items
                         localAngles = new Vector3(302.3738F, 134.1664F, 64.0929F),
                         localScale = new Vector3(0.16103F, 0.16103F, 0.1838F)
                     }
-                }
+                ]
             );
 
             return rules;
@@ -255,8 +254,8 @@ namespace Hex3Mod.Items
 
         private static void AddHooks()
         {
-            CostTypeIndex[] blacklistedCostTypes = new CostTypeIndex[9]
-            {
+            CostTypeIndex[] blacklistedCostTypes =
+            [
                 CostTypeIndex.LunarItemOrEquipment,
                 CostTypeIndex.WhiteItem,
                 CostTypeIndex.GreenItem,
@@ -266,17 +265,17 @@ namespace Hex3Mod.Items
                 CostTypeIndex.VolatileBattery,
                 CostTypeIndex.TreasureCacheVoidItem,
                 CostTypeIndex.TreasureCacheItem
-            };
+            ];
 
             // Void transformation
-            VoidTransformation.CreateTransformation(itemDef, "FourHundredTickets");
+            VoidTransformation.Add(itemDef, "FourHundredTickets");
 
             // Give item holders an ItemBehavior
             void CharacterBody_OnInventoryChanged(On.RoR2.CharacterBody.orig_OnInventoryChanged orig, CharacterBody self)
             {
                 orig(self);
                 if (!self.inventory) { return; }
-                int itemCount = self.inventory.GetItemCount(itemDef);
+                int itemCount = self.inventory.GetItemCountEffective(itemDef);
                 if (itemCount > 0 && self.master && self.master.playerCharacterMasterController)
                 {
                     VoidTicketsBehavior component;
@@ -318,6 +317,54 @@ namespace Hex3Mod.Items
                 orig(self, activator);
             }
 
+            /*void ChestBehavior_ItemDrop(On.RoR2.ChestBehavior.orig_ItemDrop orig, ChestBehavior self)
+            {
+                if (self.gameObject.GetComponent<PurchaseInteraction>())
+                {
+                    foreach (VoidTicketsBehavior behavior in Object.FindObjectsOfType<VoidTicketsBehavior>())
+                    {
+                        if (behavior && behavior.interactions.Contains(self.gameObject.GetComponent<PurchaseInteraction>()) && behavior.usesLeft > 0)
+                        {
+                            ItemTier firstDropTier;
+
+                            for (int i = 0; i < self.dropCount; i++)
+                            {
+                                PickupIndex[] generatedDrops = self.dropTable.GenerateUniqueDrops(3, self.rng);
+                                
+                                // Marked as deprecated but has no PickupCatalog variant :(
+                                var def = PickupCatalog.GetPickupDef(generatedDrops[0]);
+                                if (def.itemIndex != ItemIndex.None && ItemCatalog.GetItemDef(def.itemIndex).tier != ItemTier.NoTier) 
+                                    firstDropTier = ItemCatalog.GetItemDef(def.itemIndex).tier;
+                                else firstDropTier = ItemTier.Tier1;
+                                PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
+                                {
+                                    pickerOptions = PickupPickerController.GenerateOptionsFromList(generatedDrops),
+                                    prefabOverride = potentialPrefab,
+                                    position = self.dropTransform.position,
+                                    rotation = Quaternion.identity,
+                                    pickupIndex = PickupCatalog.FindPickupIndex(firstDropTier)
+                                },
+                                self.dropTransform.position + Vector3.up * 1, Vector3.up * self.dropUpVelocityStrength + (Quaternion.AngleAxis(360 * i / self.dropCount, Vector3.up) * self.dropTransform.forward) * self.dropForwardVelocityStrength);
+                            }
+                            behavior.interactions.Remove(self.gameObject.GetComponent<PurchaseInteraction>());
+                            if (behavior.interactions.Count > 500) { behavior.interactions.Clear(); }
+                            behavior.usesLeft--;
+                            behavior.timesUsedThisStage++;
+                            behavior.body.SetBuffCount(captainsFavorBuff.buffIndex, behavior.usesLeft);
+
+                            EffectData effectData = new()
+                            {
+                                origin = self.transform.position
+                            };
+                            EffectManager.SpawnEffect(chestKillPrefab, effectData, false);
+                            Object.Destroy(self.gameObject);
+                            return;
+                        }
+                    }
+                }
+                orig(self);
+            }*/
+
             void ChestBehavior_ItemDrop(On.RoR2.ChestBehavior.orig_ItemDrop orig, ChestBehavior self)
             {
                 if (self.gameObject.GetComponent<PurchaseInteraction>())
@@ -327,39 +374,46 @@ namespace Hex3Mod.Items
                         if (behavior && behavior.interactions.Contains(self.gameObject.GetComponent<PurchaseInteraction>()) && behavior.usesLeft > 0)
                         {
                             ItemTier firstDropTier;
-                            PickupIndex[] generatedDrops = self.dropTable.GenerateUniqueDrops(3, self.rng);
-                            // Marked as deprecated but has no PickupCatalog variant :(
-                            if (generatedDrops[0].itemIndex != ItemIndex.None && ItemCatalog.GetItemDef(generatedDrops[0].itemIndex).tier != ItemTier.NoTier)
-                            {
-                                firstDropTier = ItemCatalog.GetItemDef(generatedDrops[0].itemIndex).tier;
-                            }
-                            else
-                            {
-                                firstDropTier = ItemTier.Tier1;
-                            }
 
-                            PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
+                            for (int i = 0; i < self.dropCount; i++)
                             {
-                                pickerOptions = PickupPickerController.GenerateOptionsFromArray(generatedDrops),
-                                prefabOverride = potentialPrefab,
-                                position = self.dropTransform.position,
-                                rotation = Quaternion.identity,
-                                pickupIndex = PickupCatalog.FindPickupIndex(firstDropTier)
-                            }, 
-                            self.dropTransform.position, Vector3.up * self.dropUpVelocityStrength + self.dropTransform.forward * self.dropForwardVelocityStrength);
+                                List<UniquePickup> generatedDropsList = new List<UniquePickup>();
+                                self.dropTable.GenerateDistinctPickups(generatedDropsList, 3, self.rng, true);
+
+                                if (generatedDropsList.Count == 0) continue;
+
+                                PickupIndex firstDropIndex = generatedDropsList[0].pickupIndex;
+
+                                var def = PickupCatalog.GetPickupDef(firstDropIndex);
+
+                                if (def.itemIndex != ItemIndex.None && ItemCatalog.GetItemDef(def.itemIndex).tier != ItemTier.NoTier)
+                                    firstDropTier = ItemCatalog.GetItemDef(def.itemIndex).tier;
+                                else
+                                    firstDropTier = ItemTier.Tier1;
+
+                                PickupDropletController.CreatePickupDroplet(new GenericPickupController.CreatePickupInfo
+                                {
+                                    pickerOptions = PickupPickerController.GenerateOptionsFromList(generatedDropsList),
+                                    prefabOverride = potentialPrefab,
+                                    position = self.dropTransform.position,
+                                    rotation = Quaternion.identity,
+                                    pickupIndex = PickupCatalog.FindPickupIndex(firstDropTier)
+                                },
+                                self.dropTransform.position + Vector3.up * 1, Vector3.up * self.dropUpVelocityStrength + (Quaternion.AngleAxis(360 * i / self.dropCount, Vector3.up) * self.dropTransform.forward) * self.dropForwardVelocityStrength);
+
+                            }
                             behavior.interactions.Remove(self.gameObject.GetComponent<PurchaseInteraction>());
                             if (behavior.interactions.Count > 500) { behavior.interactions.Clear(); }
                             behavior.usesLeft--;
                             behavior.timesUsedThisStage++;
                             behavior.body.SetBuffCount(captainsFavorBuff.buffIndex, behavior.usesLeft);
 
-                            EffectData effectData = new EffectData
+                            EffectData effectData = new()
                             {
                                 origin = self.transform.position
                             };
                             EffectManager.SpawnEffect(chestKillPrefab, effectData, false);
                             Object.Destroy(self.gameObject);
-
                             return;
                         }
                     }
@@ -393,7 +447,7 @@ namespace Hex3Mod.Items
 
         public class VoidTicketsBehavior : CharacterBody.ItemBehavior
         {
-            public List<PurchaseInteraction> interactions = new List<PurchaseInteraction>();
+            public List<PurchaseInteraction> interactions = new();
             public int usesLeft = 0;
             public int timesUsedThisStage = 0;
         }

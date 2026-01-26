@@ -19,6 +19,8 @@ using UnityEngine.AddressableAssets;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System.Xml.Linq;
+using RoR2.Items;
+using System.Linq;
 
 namespace Hex3Mod
 {
@@ -34,13 +36,12 @@ namespace Hex3Mod
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("Hayaku.VanillaRebalance", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("HIFU.UltimateCustomRun", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInDependency(VoidItemAPI.VoidItemAPI.MODGUID)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class Main : BaseUnityPlugin
     {
         public const string ModGuid = "com.Hex3.Hex3Mod";
         public const string ModName = "Hex3Mod";
-        public const string ModVer = "2.1.0";
+        public const string ModVer = "2.1.11";
 
         public static RoR2.ExpansionManagement.ExpansionDef Hex3ModExpansion;
 
@@ -202,7 +203,9 @@ namespace Hex3Mod
         public static ConfigEntry<bool> BloodOfTheLamb_Enable;
         public static ConfigEntry<int> BloodOfTheLamb_ItemsTaken;
 
-        public static bool debugMode = true; // DISABLE BEFORE BUILD
+        public static Dictionary<ItemDef, string> VoidTransformation = [];
+
+        public static bool debugMode = false; // DISABLE BEFORE BUILD
 
         public static AssetBundle MainAssets;
 
@@ -214,8 +217,6 @@ namespace Hex3Mod
             {"stubbed hopoo games/fx/opaque cloud remap", "shaders/fx/hgopaquecloudremap"},
             {"stubbed hopoo games/fx/distortion", "shaders/fx/hgdistortion"}
         };
-
-        public static ManualLogSource logger;
 
         public void Awake()
         {
@@ -419,8 +420,9 @@ namespace Hex3Mod
                 goto runItBack;
             }
 
-            foreach (ConfigEntryBase configEntryBase in Config.GetConfigEntries())
+            foreach (ConfigDefinition def in Config.Keys)
             {
+                ConfigEntryBase configEntryBase = Config[def];
                 if (configEntryBase.DefaultValue.GetType() == typeof(bool))
                 {
                     ModSettingsManager.AddOption(new CheckBoxOption((ConfigEntry<bool>)configEntryBase));
@@ -538,6 +540,20 @@ namespace Hex3Mod
                 // Lunar Equipment
                 if (BloodOfTheLamb_Load.Value) { BloodOfTheLamb.UpdateItemStatus(self); }
             }
+
+            On.RoR2.Items.ContagiousItemManager.Init += orig =>
+            {
+                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] =
+                [
+                    .. ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem], 
+                    .. VoidTransformation.Where(x => ItemCatalog.FindItemIndex(x.Value) != ItemIndex.None).Select(x => new ItemDef.Pair() 
+                    { 
+                        itemDef2 = x.Key, 
+                        itemDef1 = ItemCatalog.GetItemDef(ItemCatalog.FindItemIndex(x.Value)) 
+                    })
+                ];
+                orig();
+            };
 
             Log.LogInfo("Done!");
         }
